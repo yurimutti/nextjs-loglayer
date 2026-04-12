@@ -1,32 +1,15 @@
 import { LogLayer, type PluginBeforeMessageOutParams } from "loglayer";
 import { PinoTransport } from "@loglayer/transport-pino";
 import { getSimplePrettyTerminal } from "@loglayer/transport-simple-pretty-terminal";
-import { createRequire } from "node:module";
-import type { Logger } from "pino";
+import { pino } from "pino";
 import { serializeError } from "serialize-error";
 
 const isServer = typeof window === "undefined";
 const isClient = !isServer;
-
-function getPinoLogger(): Logger {
-  const require = createRequire(`${process.cwd()}/package.json`);
-  const pinoModule = require("pino") as {
-    default?: (options?: { level?: string }) => Logger;
-    pino?: (options?: { level?: string }) => Logger;
-  };
-
-  const createPino = pinoModule.pino ?? pinoModule.default;
-
-  if (!createPino) {
-    throw new Error("Unable to load pino module");
-  }
-
-  return createPino({ level: "trace" });
-}
-
-const pinoLogger = getPinoLogger();
+const pinoLogger = pino({ level: "trace" });
 
 export const log = new LogLayer({
+  prefix: "[yurimutti.com]",
   errorFieldName: "error",
   errorSerializer: serializeError,
   transport: [
