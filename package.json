@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-loglayer",
+  "name": "nextjs-loglayer-example",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@loglayer/transport-pino": "^3.0.2",
+    "@loglayer/transport-simple-pretty-terminal": "^3.0.2",
+    "loglayer": "^9.1.0",
     "next": "16.2.3",
+    "pino": "^10.3.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "serialize-error": "^13.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
